@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-18.04'
   demands:
-  - npm
+    - npm
 
 variables:
   buildConfiguration: 'Release'
@@ -18,7 +18,7 @@ variables:
 
 steps:
 - task: UseDotNet@2
-   displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
+  displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
   inputs:
     version: '$(dotnetSdkVersion)'
 
@@ -27,7 +27,7 @@ steps:
   inputs:
     verbose: false
 
-- - script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
+- script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
@@ -49,7 +49,7 @@ steps:
     command: 'build'
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
-    
+
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'
   inputs:
